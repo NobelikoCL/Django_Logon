@@ -13,55 +13,185 @@ Sigue estos pasos para levantar el backend en tu máquina local.
 
 ### Instalación
 
-1.  **Clona el repositorio:**
+1. Clonar el repositorio
+2. Crear y activar entorno virtual
+3. Instalar dependencias Python:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Instalar dependencias Node.js:
+   ```bash
+   cd frontend
+   npm install
+   ```
 
-    ```bash
-    git clone <URL_DEL_REPOSITORIO>
-    cd <NOMBRE_DEL_DIRECTORIO>
-    ```
+## Estructura del Proyecto
 
-2.  **Crea y activa un entorno virtual:**
-
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # En Windows usa `venv\Scripts\activate`
-    ```
-
-3.  **Instala las dependencias:**
-
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-4.  **Aplica las migraciones de la base de datos:**
-
-    ```bash
-    python manage.py migrate
-    ```
-
-5.  **(Opcional) Crea un superusuario para acceder al panel de administración de Django:**
-
-    ```bash
-    python manage.py createsuperuser
-    ```
-
-### Ejecución
-
-Para iniciar el servidor de desarrollo de Django, ejecuta el siguiente comando:
-
-```bash
-python manage.py runserver
+```
+django_logon/
+├── frontend/              # Aplicación frontend React
+│   ├── public/
+│   └── src/
+├── logon/                # Aplicación Django
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── models.py
+│   ├── serializers.py
+│   ├── urls.py
+│   └── views.py
+├── core/                 # Configuración del proyecto Django
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── manage.py
+├── requirements.txt
+└── README.md
 ```
 
-El servidor estará disponible en `http://127.0.0.1:8000`.
+## Tecnologías Utilizadas
 
-## Endpoints de la API
+### Backend
+- **Python 3.8+**
+- **Django 5.2.4**
+- **Django REST Framework**
+- **djangorestframework-simplejwt**
+- **SQLite** (base de datos por defecto)
 
--   `POST /api/register/`: Registro de un nuevo usuario.
-    -   Campos: `username`, `email`, `password`, `password2`
--   `POST /api/login/`: Inicio de sesión. Devuelve tokens JWT de acceso y de refresco.
-    -   Campos: `email`, `password`
--   `POST /api/login/refresh/`: Refresca el token de acceso.
-    -   Campo: `refresh`
--   `GET /api/dashboard/`: Endpoint protegido que devuelve los datos del usuario autenticado.
-    -   Requiere un token de acceso en la cabecera `Authorization: Bearer <token>`.
+### Frontend
+- **React 18**
+- **React Router**
+- **Axios**
+- **Fetch API**
+
+## Instalación
+
+1. **Configuración del Entorno**
+   ```bash
+   # Crear entorno virtual
+   python -m venv venv
+   
+   # Activar entorno virtual
+   venv\Scripts\activate
+   ```
+
+2. **Instalar Dependencias Backend**
+   ```bash
+   # Instalar dependencias Python
+   pip install -r requirements.txt
+   ```
+
+3. **Instalar Dependencias Frontend**
+   ```bash
+   # Navegar al directorio frontend
+   cd frontend
+   
+   # Instalar dependencias npm
+   npm install
+   ```
+
+## Ejecución de la Aplicación
+
+1. **Iniciar Servidor Django**
+   ```bash
+   python manage.py runserver
+   ```
+
+2. **Iniciar Servidor React**
+   ```bash
+   # En una nueva terminal
+   cd frontend
+   npm start
+   ```
+
+Los servidores estarán disponibles en:
+- Backend: http://localhost:8000
+- Frontend: http://localhost:3000
+
+## Funcionalidades
+
+### Registro de Usuarios
+- Campos requeridos:
+  - Nombre
+  - Apellido
+  - Correo electrónico
+  - Contraseña
+  - Confirmar contraseña
+
+- Validaciones de Contraseña:
+  - Mínimo 8 caracteres
+  - Al menos una letra mayúscula
+  - Al menos una letra minúscula
+  - Al menos un número
+  - Al menos un carácter especial
+
+- Indicador de Fortaleza:
+  - Barra visual de fortaleza
+  - Animaciones de brillo para fortalezas altas
+  - Lista de requisitos con checkmarks animados
+  - Mensajes descriptivos de fortaleza
+
+### Login
+- Campos requeridos:
+  - Correo electrónico
+  - Contraseña
+
+- Validaciones:
+  - Verificación de credenciales
+  - Mensajes de error claros
+  - Redirección automática al dashboard
+
+## API Endpoints
+
+### Autenticación
+- **Registro**
+  - `POST /api/register/` - Registrar nuevo usuario
+  - Campos: nombre, apellido, email, password, confirm_password
+
+- **Login**
+  - `POST /api/login/` - Iniciar sesión
+  - Campos: email, password
+
+- **Logout**
+  - `POST /api/logout/` - Cerrar sesión
+
+- **Refresh Token**
+  - `POST /api/refresh/` - Refrescar token JWT
+
+## Base de Datos
+
+La aplicación utiliza SQLite como base de datos por defecto. El archivo de base de datos se encuentra en `db.sqlite3`.
+
+## Seguridad
+
+- **JWT Authentication**
+  - Tokens de acceso y refresh
+  - Validación de tokens
+  - Gestión de sesiones segura
+
+- **Validaciones de Contraseña**
+  - Mínimo 8 caracteres
+  - Requisitos de complejidad
+  - Indicador visual de fortaleza
+  - Prevención de contraseñas comunes
+
+## Contribución
+
+1. Clonar el repositorio
+2. Crear una rama para tus cambios
+3. Realizar los cambios necesarios
+4. Hacer commit de los cambios
+5. Crear un Pull Request
+
+## Licencia
+
+Este proyecto está bajo la licencia MIT. Consulta el archivo LICENSE para más detalles.
+
+## Configuración
+
+- El frontend está configurado para conectarse al backend en `http://localhost:8000`
+- Las credenciales de superusuario se pueden crear con:
+  ```bash
+  python manage.py createsuperuser
+  ```

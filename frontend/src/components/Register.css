@@ -1,0 +1,308 @@
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+  padding: 20px;
+}
+
+.auth-card {
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.auth-title {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+label {
+  font-weight: 500;
+  color: #444;
+  font-size: 14px;
+}
+
+.auth-input {
+  padding: 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.auth-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.auth-button {
+  background-color: #007bff;
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.auth-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+}
+
+.password-strength {
+  margin-top: 12px;
+}
+
+.strength-indicator {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.strength-bar {
+  height: 10px;
+  background: #eee;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 4px;
+  position: relative;
+}
+
+.strength-progress {
+  height: 100%;
+  border-radius: 5px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Animaciones para los estados de fortaleza */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.weak .strength-progress {
+  background: #ff6b6b;
+  animation: pulse 1s infinite;
+}
+
+.medium .strength-progress {
+  background: #ff9f43;
+  animation: pulse 1.2s infinite;
+}
+
+.strong .strength-progress {
+  background: #2ec4b6;
+  animation: pulse 1.4s infinite;
+}
+
+.very-strong .strength-progress {
+  background: #45b7d1;
+  animation: pulse 1.6s infinite;
+}
+
+.excellent .strength-progress {
+  background: #3498db;
+  animation: pulse 1.8s infinite;
+}
+
+.strength-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #666;
+  padding: 0 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.label {
+  white-space: nowrap;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Efecto de brillo para las etiquetas */
+.label::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.weak .label::after {
+  transform: translateX(-100%);
+}
+
+.medium .label::after {
+  transform: translateX(0);
+}
+
+.strong .label::after {
+  transform: translateX(0);
+  animation: shine 2s infinite;
+}
+
+.very-strong .label::after {
+  transform: translateX(0);
+  animation: shine 1.5s infinite;
+}
+
+.excellent .label::after {
+  transform: translateX(0);
+  animation: shine 1s infinite;
+}
+
+/* Animación de brillo */
+@keyframes shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Efecto de rotación suave */
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg) translateX(-100%);
+  }
+  100% {
+    transform: rotate(360deg) translateX(100%);
+  }
+}
+
+/* Efecto de color cambiante */
+@keyframes colorChange {
+  0% {
+    color: #ff6b6b;
+  }
+  25% {
+    color: #ff9f43;
+  }
+  50% {
+    color: #2ec4b6;
+  }
+  75% {
+    color: #45b7d1;
+  }
+  100% {
+    color: #3498db;
+  }
+}
+
+.requirements-list {
+  margin-top: 8px;
+  padding: 8px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.requirement {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0;
+  color: #666;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.8;
+}
+
+.requirement:hover {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+.requirement.met {
+  color: #28a745;
+  opacity: 1;
+}
+
+.requirement.met span {
+  animation: checkmark 0.3s ease-out;
+}
+
+@keyframes checkmark {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.requirement span {
+  font-size: 14px;
+  font-weight: 600;
+  transition: transform 0.2s ease;
+}
+
+.requirement .label {
+  transition: color 0.3s ease;
+}
+
+.requirement.met .label {
+  color: #28a745;
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.auth-link {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
