@@ -1,11 +1,13 @@
 from django.contrib import admin
 from django.urls import path
+from django.views.generic import RedirectView
 from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 from logon.views import RegisterView, DashboardView, MyTokenObtainPairView
 
 urlpatterns = [
+    path('', RedirectView.as_view(url='/api/login/', permanent=True)),
     path('admin/', admin.site.urls),
     path('api/register/', RegisterView.as_view(), name='register'),
     path('api/login/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
